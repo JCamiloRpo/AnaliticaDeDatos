@@ -1,0 +1,11 @@
+Género (H:0, M:1);Empleado;Estudiante;Sin ocupación;Estado civil Soltero;Estado civil Casado - Unión libre;Estado civil Separado;Tiene hijos;Edad entre 0 y 20;Edad entre 21 y 40;Edad mayor a 40;Estrato Entre 1 y 3;Estrato Entre 4 y 6;Genero_acción;Genero_SyFy;Genero_Drama;Película (1) serie (0);Animación;Live Action;Contiene Sexo o Violencia (1) si no (0);Independiente (1) comercial (0);Duración;Gusto;Película;Persona
+1;0;0;1;0;1;0;1;0;0;1;1;0;1;0;0;1;0;1;1;0;110;1;Misión Imposible;XXXX
+1;0;0;1;0;1;0;1;0;0;1;1;0;0;0;1;1;0;1;1;0;122;1;Guasón;XXXX
+1;0;0;1;0;1;0;1;0;0;1;1;0;0;0;1;1;0;1;0;0;133;1;Bajo la misma estrella;XXXX
+1;0;0;1;0;1;0;1;0;0;1;1;0;0;0;1;1;0;1;1;1;94;1;El niño con el pijama de rayas;XXXX
+0;0;1;0;1;0;0;0;1;0;0;1;0;1;1;1;0;0;1;1;0;40;0;Stranger Things;XXXX
+0;0;1;0;1;0;0;0;1;0;0;0;1;0;0;1;1;0;1;1;1;94;0;El niño con el pijama de rayas;XXXX
+0;0;1;0;1;0;0;0;1;0;0;0;1;1;1;0;1;1;1;0;0;122;0;Battle angel: la ultima guerrera (Alita);XXXX
+0;0;1;0;1;0;0;0;1;0;0;0;1;0;1;1;1;1;0;0;0;103;0;Wall-e;XXXX
+1;1;1;0;1;0;0;0;0;1;0;1;0;1;0;1;1;0;1;1;0;102;-1;Salvando..;Daniela
+1;1;1;0;1;0;0;0;0;1;0;1;0;0;0;1;1;0;1;1;0;102;-1;Tres metros;Daniela
