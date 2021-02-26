@@ -1,0 +1,7 @@
+age,job,marital,education,default,housing,loan,month,day_of_week,campaign,previous,cons.price.idx,cons.conf.idx,nr.employed,y
+45,admin.,married,high.school,no,no,no,may,mon,1,0,93.994,-36.4,5191,?
+57,services,married,high.school,no,no,no,may,mon,1,0,93.994,-36.4,5191,?
+37,housemaid,married,basic.6y,no,yes,no,may,mon,1,0,93.994,-36.4,5191,?
+40,admin.,married,basic.6y,no,no,no,may,mon,1,0,93.994,-36.4,5191,?
+56,services,married,high.school,no,no,yes,may,mon,1,0,93.994,-36.4,5191,?
+45,services,married,basic.9y,no,no,no,may,mon,1,0,93.994,-36.4,5191,?

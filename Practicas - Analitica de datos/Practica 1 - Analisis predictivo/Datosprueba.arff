@@ -1,0 +1,25 @@
+@relation 'Datos-weka.filters.unsupervised.attribute.Remove-R13-weka.filters.unsupervised.attribute.Remove-R11-weka.filters.unsupervised.attribute.Remove-R8-weka.filters.unsupervised.attribute.ReplaceMissingValues-weka.filters.unsupervised.attribute.Remove-R12-13,16'
+
+@attribute age numeric
+@attribute job {housemaid,services,admin.,blue-collar,technician,retired,management,unemployed,self-employed,entrepreneur,student}
+@attribute marital {married,single,divorced}
+@attribute education {basic.4y,high.school,basic.6y,basic.9y,professional.course,university.degree,illiterate}
+@attribute default {no,yes}
+@attribute housing {no,yes}
+@attribute loan {no,yes}
+@attribute month {may,jun,jul,aug,oct,nov,dec,mar,apr,sep}
+@attribute day_of_week {mon,tue,wed,thu,fri}
+@attribute campaign numeric
+@attribute previous numeric
+@attribute cons.price.idx numeric
+@attribute cons.conf.idx numeric
+@attribute nr.employed numeric
+@attribute y {no,yes}
+
+@data
+45,admin.,married,high.school,no,no,no,may,mon,1,0,93.994,-36.4,5191,?
+57,services,married,high.school,no,no,no,may,mon,1,0,93.994,-36.4,5191,?
+37,housemaid,married,basic.6y,no,yes,no,may,mon,1,0,93.994,-36.4,5191,?
+40,admin.,married,basic.6y,no,no,no,may,mon,1,0,93.994,-36.4,5191,?
+56,services,married,high.school,no,no,yes,may,mon,1,0,93.994,-36.4,5191,?
+45,services,married,basic.9y,no,no,no,may,mon,1,0,93.994,-36.4,5191,?
