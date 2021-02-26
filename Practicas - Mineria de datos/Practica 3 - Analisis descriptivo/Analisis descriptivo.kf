@@ -1,0 +1,457 @@
+{
+	"flow_name" : "Analisis descriptivo",
+	"steps" : [
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note2",
+				"noteText" : "Asociacion\nApriori"
+			},
+			"connections" : {
+			},
+			"coordinates" : "620,172"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Loader",
+			"properties" : {
+				"loader" : {
+					"type" : "loader",
+					"class" : "weka.core.converters.ArffLoader",
+					"filePath" : "D:/UPB/Sem 6/Mineria de datos/Practicas/Practica 3 - Analisis descriptivo/MedicamentosHistorico.arff",
+					"useRelativePath" : false
+				},
+				"name" : "Medicamentos"
+			},
+			"connections" : {
+				"dataSet" : [
+					"AttributeSummarizer",
+					"ClassAssigner",
+					"Discretize",
+					"El 100%3",
+					"El 100%"
+				]
+			},
+			"coordinates" : "27,200"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TrainingSetMaker",
+			"properties" : {
+				"name" : "El 100%"
+			},
+			"connections" : {
+				"trainingSet" : [
+					"SimpleKMeans"
+				]
+			},
+			"coordinates" : "202,34"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TextViewer",
+			"properties" : {
+				"name" : "Reglas"
+			},
+			"connections" : {
+			},
+			"coordinates" : "538,159"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.ClustererPerformanceEvaluator",
+			"properties" : {
+				"name" : "ClustererPerformanceEvaluator"
+			},
+			"connections" : {
+				"text" : [
+					"Perfiles"
+				]
+			},
+			"coordinates" : "474,35"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TextViewer",
+			"properties" : {
+				"name" : "Perfiles"
+			},
+			"connections" : {
+			},
+			"coordinates" : "590,37"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note",
+				"noteText" : "Clustering\nKmeans"
+			},
+			"connections" : {
+			},
+			"coordinates" : "676,51"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note3",
+				"noteText" : "Seleccion de factores"
+			},
+			"connections" : {
+			},
+			"coordinates" : "575,258"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.ASEvaluator",
+			"properties" : {
+				"evaluator" : {
+					"type" : "optionHandler",
+					"class" : "weka.attributeSelection.CorrelationAttributeEval",
+					"options" : ""
+				},
+				"name" : "CorrelationAttributeEval",
+				"treatXValFoldsSeparately" : false
+			},
+			"connections" : {
+				"text" : [
+					"Correlaciones"
+				]
+			},
+			"coordinates" : "343,366"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.ASSearchStrategy",
+			"properties" : {
+				"name" : "Ranker",
+				"searchStrategy" : {
+					"type" : "optionHandler",
+					"class" : "weka.attributeSelection.Ranker",
+					"options" : "-T -1.7976931348623157E308 -N -1"
+				}
+			},
+			"connections" : {
+				"info" : [
+					"CorrelationAttributeEval",
+					"PrincipalComponents"
+				]
+			},
+			"coordinates" : "206,276"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TrainingSetMaker",
+			"properties" : {
+				"name" : "El 100%2"
+			},
+			"connections" : {
+				"trainingSet" : [
+					"Apriori"
+				]
+			},
+			"coordinates" : "305,156"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TrainingSetMaker",
+			"properties" : {
+				"name" : "El 100%3"
+			},
+			"connections" : {
+				"trainingSet" : [
+					"CorrelationAttributeEval",
+					"PrincipalComponents",
+					"Discretize2"
+				]
+			},
+			"coordinates" : "209,362"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Clusterer",
+			"properties" : {
+				"clusterer" : {
+					"type" : "optionHandler",
+					"class" : "weka.clusterers.SimpleKMeans",
+					"options" : "-init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -N 6 -A \"weka.core.EuclideanDistance -R first-last\" -I 500 -num-slots 1 -S 10"
+				},
+				"loadClustererFileName" : "",
+				"name" : "SimpleKMeans"
+			},
+			"connections" : {
+				"batchClusterer" : [
+					"ClustererPerformanceEvaluator"
+				]
+			},
+			"coordinates" : "348,36"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Associator",
+			"properties" : {
+				"associator" : {
+					"type" : "optionHandler",
+					"class" : "weka.associations.Apriori",
+					"options" : "-N 100 -T 0 -C 0.8 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1"
+				},
+				"name" : "Apriori"
+			},
+			"connections" : {
+				"text" : [
+					"Reglas"
+				]
+			},
+			"coordinates" : "425,158"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.AttributeSummarizer",
+			"properties" : {
+				"name" : "AttributeSummarizer",
+				"offscreenAdditionalOpts" : "",
+				"offscreenHeight" : "400",
+				"offscreenRendererName" : "Weka Chart Renderer",
+				"offscreenWidth" : "500",
+				"offscreenXAxis" : ""
+			},
+			"connections" : {
+			},
+			"coordinates" : "30,349"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Filter",
+			"properties" : {
+				"filter" : {
+					"type" : "optionHandler",
+					"class" : "weka.filters.unsupervised.attribute.Discretize",
+					"options" : "-B 3 -M -1.0 -R 1,5,6 -precision 6"
+				},
+				"name" : "Discretize"
+			},
+			"connections" : {
+				"dataSet" : [
+					"El 100%2"
+				]
+			},
+			"coordinates" : "193,156"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.ASEvaluator",
+			"properties" : {
+				"evaluator" : {
+					"type" : "optionHandler",
+					"class" : "weka.attributeSelection.PrincipalComponents",
+					"options" : "-R 0.95 -A 5 -O"
+				},
+				"name" : "PrincipalComponents",
+				"treatXValFoldsSeparately" : false
+			},
+			"connections" : {
+				"text" : [
+					"BackToOriginal"
+				]
+			},
+			"coordinates" : "342,276"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TextViewer",
+			"properties" : {
+				"name" : "Correlaciones"
+			},
+			"connections" : {
+			},
+			"coordinates" : "486,365"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TextViewer",
+			"properties" : {
+				"name" : "BackToOriginal"
+			},
+			"connections" : {
+			},
+			"coordinates" : "477,276"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Filter",
+			"properties" : {
+				"filter" : {
+					"type" : "optionHandler",
+					"class" : "weka.filters.unsupervised.attribute.Discretize",
+					"options" : "-B 3 -M -1.0 -R 1,5,6 -precision 6"
+				},
+				"name" : "Discretize2"
+			},
+			"connections" : {
+				"trainingSet" : [
+					"Apriori2"
+				]
+			},
+			"coordinates" : "339,455"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TextViewer",
+			"properties" : {
+				"name" : "Reglas2"
+			},
+			"connections" : {
+			},
+			"coordinates" : "599,456"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Associator",
+			"properties" : {
+				"associator" : {
+					"type" : "optionHandler",
+					"class" : "weka.associations.Apriori",
+					"options" : "-N 100 -T 0 -C 0.8 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -A -c 7"
+				},
+				"name" : "Apriori2"
+			},
+			"connections" : {
+				"text" : [
+					"Reglas2"
+				]
+			},
+			"coordinates" : "481,457"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.ClassAssigner",
+			"properties" : {
+				"classColumn" : "MEDICAMENTO",
+				"name" : "ClassAssigner"
+			},
+			"connections" : {
+				"dataSet" : [
+					"TrainTestSplitMaker"
+				]
+			},
+			"coordinates" : "227,572"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TrainTestSplitMaker",
+			"properties" : {
+				"name" : "TrainTestSplitMaker",
+				"preserveOrder" : false,
+				"seed" : "1",
+				"trainPercent" : "70"
+			},
+			"connections" : {
+				"trainingSet" : [
+					"J48",
+					"SimpleLogistic"
+				],
+				"testSet" : [
+					"J48",
+					"SimpleLogistic"
+				]
+			},
+			"coordinates" : "337,573"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Classifier",
+			"properties" : {
+				"classifier" : {
+					"type" : "optionHandler",
+					"class" : "weka.classifiers.trees.J48",
+					"options" : "-B -C 0.25 -M 2"
+				},
+				"loadClassifierFileName" : "",
+				"name" : "J48",
+				"resetIncrementalClassifier" : false,
+				"updateIncrementalClassifier" : true
+			},
+			"connections" : {
+				"graph" : [
+					"GraphViewer"
+				]
+			},
+			"coordinates" : "478,542"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.GraphViewer",
+			"properties" : {
+				"name" : "GraphViewer"
+			},
+			"connections" : {
+			},
+			"coordinates" : "601,543"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Classifier",
+			"properties" : {
+				"classifier" : {
+					"type" : "optionHandler",
+					"class" : "weka.classifiers.functions.SimpleLogistic",
+					"options" : "-I 0 -M 500 -H 50 -W 0.0"
+				},
+				"loadClassifierFileName" : "",
+				"name" : "SimpleLogistic",
+				"resetIncrementalClassifier" : false,
+				"updateIncrementalClassifier" : true
+			},
+			"connections" : {
+				"text" : [
+					"Regresion"
+				]
+			},
+			"coordinates" : "479,626"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.TextViewer",
+			"properties" : {
+				"name" : "Regresion"
+			},
+			"connections" : {
+			},
+			"coordinates" : "599,628"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note4",
+				"noteText" : "Si falla la ejecucion por el SimpleKMeans; se desconecta el Arff\ncon la parte de la Seleccion de factores (El 100%3) y para ejecutar esta\nparte se debe desconectar la del Clustering (El 100%)\n"
+			},
+			"connections" : {
+			},
+			"coordinates" : "843,294"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note5",
+				"noteText" : "Componentes Principales"
+			},
+			"connections" : {
+			},
+			"coordinates" : "559,301"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note6",
+				"noteText" : "Correlaciones"
+			},
+			"connections" : {
+			},
+			"coordinates" : "564,385"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note7",
+				"noteText" : "Apriori"
+			},
+			"connections" : {
+			},
+			"coordinates" : "676,479"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note8",
+				"noteText" : "Arbol decisiones"
+			},
+			"connections" : {
+			},
+			"coordinates" : "678,564"
+		},
+		{
+			"class" : "weka.knowledgeflow.steps.Note",
+			"properties" : {
+				"name" : "Note9",
+				"noteText" : "Regresion logistica"
+			},
+			"connections" : {
+			},
+			"coordinates" : "679,651"
+		}
+	]
+}
